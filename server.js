@@ -9,7 +9,6 @@ var oxr = require('open-exchange-rates'),
 var request = require('request');
 app.use(bodyParser());
 app.use(function(req,res,next) {
-  res.setHeader('Content-Type', 'application/json');
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -21,6 +20,7 @@ oxr.set({ app_id: '100c056c90844cbaaf1cb44aa19dc406' });
 app.use(express.static(__dirname + '/public'));
 
 app.get('/tax:name', function(req, res){
+  res.setHeader('Content-Type', 'application/json');
     for(var i=0;i<countryData.getCountries().length;i++){
       if(req.query.q === countryData.getCountries()[i][0].name){
         var fxCode = countryData.getCountries()[i][1].rate;
@@ -37,6 +37,7 @@ app.get('/tax:name', function(req, res){
 });  
 
 app.get('/hotel:name', function(req, res){
+  res.setHeader('Content-Type', 'application/json');
   var hotelUrl = [];
   hotelUrl = req._parsedUrl.href.split('');
   hotelUrl.splice(0,14);
