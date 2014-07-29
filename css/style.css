@@ -692,14 +692,6 @@
 /*********************************************************************************/
 /* Intro                                                                         */
 /*********************************************************************************/
-
-	#intro {
-		background: url('images/overlay.png'), url('../images/airplanefootage.mp4');
-		background-size: 256px 256px, cover;
-		background-attachment: fixed, fixed;
-		background-position: top left, bottom center;
-		background-repeat: repeat, no-repeat;
-	}
 	.video-wrapper {
 		position: relative;
 		display: block;
@@ -714,7 +706,6 @@
 		height: auto;
 		width: 100%;
 		float: left;
-		z-index: 999;
 	}
 	.video-text {
 		color: white;
@@ -759,7 +750,7 @@
 .content-wrap {
   float: right;
   width: 50%;
-    background-color: green;
+  background: url('images/overlay.png');
   display: block;
 }
 
@@ -771,7 +762,6 @@
 .info {
   width: 50%;
   float: left;
-  border: 1px solid black;
   background-color: white;
 
 }

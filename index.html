@@ -185,14 +185,28 @@
 			</div>
 	</div>
 	<div class="content-wrap">
-		<div class="info-wrap">
-			<div class="info" id="country-image"><img src='{{countryImage}}'/></div>
-			<div class="info" id="country-name">{{country}}
+		<div class="form-modal">				
+
+				<div class="signup-form">
+					<form>
+						<div class="info-wrap">
+							<div class="info" id="country-image"><img src='{{countryImage}}'/></div>
+							<div class="info" id="country-name">{{country}}</div>
+						</div>
+						<div class="form-row">
+							The amount of money you will have in {{countryName}} is {{fxIncome}} {{currency}}.
+						</div>
+						<div class="form-row">
+							Nightly rate is: {{nightlyRate}}
+						</div>
+						<div class="form-row">
+							Hotel Total: {{hotelTotal}}
+						</div>
+					</form>
+					<!-- <div class="form-feedback"></div>
+					<button class="btn-signup">Sign up</button> -->
+				</div>
 			</div>
-		</div>
-		The amount of money you will have in {{countryName}} is {{fxIncome}} {{currency}}.
-		Nightly rate is: {{nightlyRate}}
-		Hotel Total: {{hotelTotal}}
 	</div>
 	</div>
 
