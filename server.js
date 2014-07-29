@@ -18,7 +18,7 @@ app.use(function(req,res,next) {
 
 oxr.set({ app_id: '100c056c90844cbaaf1cb44aa19dc406' });
 
-app.use(connect.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 
 app.get('/tax:name', function(req, res){
     for(var i=0;i<countryData.getCountries().length;i++){
