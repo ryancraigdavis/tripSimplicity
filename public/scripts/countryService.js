@@ -37,7 +37,7 @@ var app = angular.module('travelApp');
 		this.getTax = function(country){
 			var deferred = $q.defer();
 			$http({
-				method: 'GET', url: 'http://localhost:9100/tax:name?q='+country
+				method: 'GET', url: 'http://www.tripsimplicity.com/tax:name?q='+country
 			}).success(function(data) {
 			    deferred.resolve(data);
 			}).error(function(err){

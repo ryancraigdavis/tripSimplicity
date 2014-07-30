@@ -36,7 +36,7 @@ var app = angular.module('travelApp');
 			var deferred = $q.defer();
 			var url = 'http://dev.api.ean.com/ean-services/rs/hotel/v3/list?minorRev=[current_minorRev_4]&cid=55505&apiKey=5akxwaxqb8b4fsbtj6tbpfrm&customerSessionId=88888&customerUserAgent=MOBILE_SITE&customerIpAddress=67.214.233.236&locale=en_US&currencyCode=USD&destinationString='+city+'&countryCode='+country+'&supplierCacheTolerance=MED&arrivalDate='+aDate+'&departureDate='+dDate+'&room1='+adults+','+children+'&minStarRating='+minStars+'&maxStarRating='+maxStars+'&numberOfResults=1';
 			$http({
-				method: 'GET', url: 'http://localhost:9100/hotel:name?q='+url
+				method: 'GET', url: 'http://www.tripsimplicity.com/hotel:name?q='+url
 			}).success(function(data) {
 				console.log(data);
 			    deferred.resolve(data);

@@ -8,7 +8,7 @@ var app = angular.module('travelApp');
 		this.getTax = function(name){
 			var deferred = $q.defer();
 			$http({
-				method: 'GET', url: 'http://localhost:9100/tax'
+				method: 'GET', url: 'http://www.tripsimplicity.com/tax'
 			}).success(function(data) {
 				console.log(data);
 			    deferred.resolve(data);
