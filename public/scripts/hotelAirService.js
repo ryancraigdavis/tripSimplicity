@@ -45,4 +45,39 @@ var app = angular.module('travelApp');
 			});
 			return deferred.promise;
 		};
+		this.getAir = function(adults,children,aDate){
+			var deferred = $q.defer();
+			$http({
+				method: 'POST', 
+				url: 'https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyDUpU-AAvTxGpj9TGv1Q-vEBbB-U-TPnI8',
+				data: {
+				  "request": {
+				    "passengers": {
+				      "kind": "qpxexpress#passengerCounts",
+				      "adultCount": adults,
+				      "childCount": children,
+				      "infantInLapCount": 0,
+				      "infantInSeatCount": 0,
+				      "seniorCount": 0
+				    },
+				    "slice": [
+				      {
+				        "kind": "qpxexpress#sliceInput",
+				        "origin": "SLC",
+				        "destination": "LAX",
+				        "date": aDate
+				        }
+				    ],
+				    "saleCountry": "US",
+				    "refundable": false,
+				    "solutions": 1
+				  }
+				}
+			}).success(function(data) {
+				deferred.resolve(data);
+			}).error(function(err){
+				deferred.reject(err);
+			});
+			return deferred.promise;
+		};
 	})

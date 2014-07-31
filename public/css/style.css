@@ -648,19 +648,16 @@
 		padding-top: 3em;
 	}
 
-	#logo {
-		position: absolute;
-		left: 1em;
+	#logo img{
+		width: 225px;
+		height: 75px;
 		top: 0;
-		height: 3em;
-		line-height: .5em;
-		letter-spacing: -1px;
+		position: absolute;
 	}
-	
-		#logo a {
-			font-size: 1.25em;
-		}
-	
+	.video-text h3{
+		margin: 25px;
+		padding: 20px;
+	}
 	#nav {
 		position: absolute;
 		right: 0.5em;
@@ -729,6 +726,12 @@
 
 .info { min-height: 80px; }
 
+.red-titles{
+	color: red;
+}
+.footer{
+	margin: 20px;
+}
 /* layout */
 .main-wrap {
     /* overflow to handle inner floating block */
@@ -736,11 +739,12 @@
     position: relative;
     display: block;
 }
-
+.ng-scope{
+	background: url('images/overlay.png')
+}
 .sidebar {
   float: left;
   width: 50%;
-  background: url('images/overlay.png');
   display: block;
 }
 #country-image img{
@@ -750,7 +754,6 @@
 .content-wrap {
   float: right;
   width: 50%;
-  background: url('images/overlay.png');
   display: block;
 }
 
@@ -767,13 +770,13 @@
 }
 .form-modal {
 	border: 10px solid #76daff;
-	box-shadow: 0 0 60px rgba(0,0,0,0.5);
+	box-shadow: 0 0 20px rgba(0,0,0,0.5);
 	position: static;
 	max-width: 96%;
 	margin-left: auto;
 	margin-right: auto;
 	width: 96%;
-	margin-top: 15px;
+	margin-top: 25px;
 	margin-bottom: 15px;
 	padding: 20px;
 	background: white;

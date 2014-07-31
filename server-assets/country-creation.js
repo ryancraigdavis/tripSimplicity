@@ -7,7 +7,8 @@
     currency: 'pesos'
   },
   {
-    hotelCode: 'MX'
+    hotelCode: 'MX',
+    noVisa: true
   }
 ];
 
@@ -20,7 +21,8 @@
     currency: 'pounds'
   },
   {
-    hotelCode: 'GB'
+    hotelCode: 'GB',
+    noVisa: true
   }
 ];
 
@@ -33,7 +35,8 @@ var France = [
     currency: 'euros'
   },
   {
-    hotelCode: 'FR'
+    hotelCode: 'FR',
+    noVisa: true
   }
 ];
 
@@ -46,7 +49,8 @@ var Canada = [
     currency: 'canadian dollars'
   },
   {
-    hotelCode: 'CA'
+    hotelCode: 'CA',
+    noVisa: true
   }
 ];
 

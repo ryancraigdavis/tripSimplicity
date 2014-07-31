@@ -29,7 +29,7 @@
 			<header id="header">
 
 				<!-- Logo -->
-					<h1 id="logo">tripSimplicity</h1>
+					<h1 id="logo"><img src="images/logo.svg"></h1>
 				
 				<!-- Nav -->
 					<nav id="nav">
@@ -46,7 +46,11 @@
 			<section id="intro" class="main style1 dark fullscreen">
 
 				<div class="content container small">
-				<div class="video-text"><h3>Welcome to tripSimplicity</h3></div>
+					<div class="video-text">
+						<h3>Welcome to tripSimplicity</h3>
+						<h3>tripSimplicity allows you to find the total cost of a trip to anywhere in the world!</h3>
+						<h3>Simply enter your budget and preferences for food, flight, and hotel and click submit!</h3>
+					</div>
 				</div>
 
 				<footer>
@@ -78,11 +82,11 @@
 								  </button>
 								  <ul class="dropdown-menu" role="menu">
 								  	<li><a ng-click="getCountry('Canada')">Canada</a></li>
-								  	<li><a ng-click="getCountry('China')">China</a></li>
+<!-- 								  	<li><a ng-click="getCountry('China')">China</a></li> -->
 								  	<li><a ng-click="getCountry('France')">France</a></li>
 								    <li><a ng-click="getCountry('Mexico')">Mexico</a></li>
 								    <li><a ng-click="getCountry('United Kingdom')">United Kingdom</a></li>
-								    <li><a ng-click="getUsa('United States')">United States</a></li>
+<!-- 								    <li><a ng-click="getUsa('United States')">United States</a></li> -->
 								  </ul>
 								</div>
 							</div>
@@ -112,7 +116,7 @@
 								  	<li><a ng-click="getAdults('1')">1</a></li>
 								  	<li><a ng-click="getAdults('2')">2</a></li>
 								  </ul>
-								  {{adults}}
+								  <p ng-hide="!adults"> Adults: {{adults}}</p>
 								</div>
 							</div>
 								<div class="form-same">
@@ -126,14 +130,14 @@
 								  	<li><a ng-click="getChildren('1')">1</a></li>
 								  	<li><a ng-click="getChildren('2')">2</a></li>
 								  </ul>
-								  {{children}}
+								  <p ng-hide="!children"> Children: {{children}}</p>
 								</div>
 							</div>
 						</div>
 						<div class="hotel-rating-selection">
 							<h4>Hotel Rating Selection</h4>
 							<div class="form-same">
-								<label for="minStars">Min</label>
+								<label for="minStars"></label>
 								<div class="btn-group">
 								  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
 								    Number of Stars<span class="caret"></span>
@@ -145,10 +149,10 @@
 								  	<li><a ng-click="getMinStars('4.0')">4</a></li>
 								  	<li><a ng-click="getMinStars('5.0')">5</a></li>
 								  </ul>
-								  {{starMin}}
+								  <p ng-hide="!starMin">Rating: {{starMin}} Stars</p>
 								</div>
 							</div>
-							<div class="form-same">
+							<!-- <div class="form-same">
 								<label for="maxStars">Max</label>
 								<div class="btn-group">
 								  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
@@ -161,18 +165,21 @@
 								  	<li><a ng-click="getMaxStars('4.0')">4</a></li>
 								  	<li><a ng-click="getMaxStars('5.0')">5</a></li>
 								  </ul>
-								  {{starMax}}
+								  <p ng-hide="!starMax">Maximum Stars: {{starMax}}</p>
 								</div>
-							</div>
+							</div> -->
 						</div>
 						<div class="form-row">
 							<label for="arrive-date-field">Arrival Date</label>
 							<input id="arrive-date-field" name="date" type="date" ng-model="arrive"/>
-							{{arrive}}
 						</div>
 						<div class="form-row">
 							<label for="departure-date-field">Departure Date</label>
 							<input id="departure-date-field" name="date" type="date" ng-model="depart"/>
+						</div>
+						<div class="form-row">
+							<label for="city">Departure City</label>
+							<input id="city-field" name="city" type="city" ng-model="depCity"/>
 						</div>
 						<div class="form-row">
 							<label for="city">Destination City</label>
@@ -189,22 +196,37 @@
 
 				<div class="signup-form">
 					<form>
-						<div class="info-wrap">
+						<div class="info-wrap" ng-hide="!country">
 							<div class="info" id="country-image"><img src='{{countryImage}}'/></div>
 							<div class="info" id="country-name">{{country}}</div>
 						</div>
-						<div class="form-row">
-							The amount of money you will have in {{countryName}} is {{fxIncome}} {{currency}}.
-						</div>
-						<div class="form-row">
-							Nightly rate is: {{nightlyRate}}
-						</div>
-						<div class="form-row">
-							Hotel Total: {{hotelTotal}}
+						<div ng-hide="!fxIncome">
+							<div class="form-row">
+								Your trip budget is: {{preBudget}}.
+							</div>
+							<!-- <div class="form-row">
+								<h3 class="red-titles">Flight</h3>
+								Average cost of a flight from ((yourCity)) to {{city}}: ((flightCost)).
+							</div> -->
+							<div class="form-row">
+								<h3 class="red-titles">Hotel</h3>
+								Average nightly hotel rate: {{nightlyRate}}.
+								Total cost of a hotel in {{city}}: {{hotelTotal}}.
+							</div>
+							<div class="form-row">
+								<h3 class="red-titles">Visa Requirements</h3>
+								<!-- Your visa will cost ((visaCost)). You can apply for the visa here: ((visaUrl)).
+								The visa will take an average of ((visaDays)) days. -->
+								{{countryName}} does not require a visa for tourists.
+							</div>
+							<div class="form-row">
+								<h3 class="red-titles">Exchange Rate</h3>
+								Your pre-exchange rate amount of money is {{preFxIncome}}.
+								After the exchange rate, the amount of money you will have in {{countryName}} is {{fxIncome}} {{currency}}.
+<!-- 								The money you have left over is ((tripResult)). -->
+							</div>
 						</div>
 					</form>
-					<!-- <div class="form-feedback"></div>
-					<button class="btn-signup">Sign up</button> -->
 				</div>
 			</div>
 	</div>
