@@ -24,12 +24,11 @@ var app = angular.module('travelApp');
 			$scope.starMin = minStars;
 			$scope.starMax = minStars;
 		};
-		// $scope.getMaxStars = function(maxStars){
-		// 	$scope.starMax = maxStars;
-		// };
-
-	 	$scope.getRate = function(country,income,adults,children,starMin,starMax,preArrive,preDepart,city){
-	 		$scope.city = city;
+	 	$scope.getRate = function(country,income,adults,children,starMin,preArrive,preDepart,dCity,oCity){
+	 		if(preDepart<=preArrive){
+	 			alert('Please select a return date that follows your departure date!');
+	 			return;
+	 		};
 	 		var modifiedName = countryService.modifyTax(country);
 	 		var fxIncome = 0;
 	 		var countryCode = '';
@@ -40,8 +39,15 @@ var app = angular.module('travelApp');
 	 		var preFxIncome = 0;
 	 		var arrive = '';
 	 		var depart = '';
+	 		var airPrice = '';
 	 		arrive = hotelAirService.fixDate(preArrive);
 	 		depart = hotelAirService.fixDate(preDepart);
+	 		var departureCity = countryService.modifyCity(oCity);
+	 		var destinationCity = countryService.modifyCity(dCity);
+	 		$scope.departureCity = departureCity;
+	 		$scope.destinationCity = destinationCity;
+	 		var oAirCode = countryService.getAirportCode(oCity);
+	 		var dAirCode = countryService.getAirportCode(dCity);
 	 		income = countryService.modifyIncome(income);
 	 		$scope.preBudget = intService.modifyIncome(income);
 			countryService.getTax(modifiedName).then(function(data){
@@ -49,31 +55,32 @@ var app = angular.module('travelApp');
 				data.shift();
 				$scope.currency = data[0].currency;
 				countryCode = data[1].hotelCode;
-				// hotelAirService.getAir(adults,children,preArrive).then(function(dataAir){
-				// 	console.log(dataAir)
-				// })
-				hotelAirService.getHotel(adults,children,starMin,starMax,arrive,depart,countryCode,city).then(function(dataHotel){
-					hotelInfo = dataHotel.HotelListResponse.HotelList.HotelSummary;
-					rates = hotelInfo.RoomRateDetailsList.RoomRateDetails.RateInfo.ChargeableRateInfo;
-					var key;
-					for(key in rates){
-					    if(key === '@maxNightlyRate'){
-					    preNightlyRate = rates[key];
-					    };
-					    if(key === '@total'){
-					    preTotalHotelRate = rates[key];
+				airPrice = hotelAirService.getAir(adults,children,preArrive,oAirCode,dAirCode).then(function(dataAir){
+					console.log(dataAir);
+					airPrice = dataAir.trips.tripOption[0].saleTotal;
+					airPrice = countryService.modifyAirPrice(airPrice);
+					$scope.flightCost = intService.modifyIncome(airPrice);
+					hotelAirService.getHotel(adults,children,starMin,arrive,depart,countryCode,destinationCity).then(function(dataHotel){
+						hotelInfo = dataHotel.HotelListResponse.HotelList.HotelSummary;
+						rates = hotelInfo.RoomRateDetailsList.RoomRateDetails.RateInfo.ChargeableRateInfo;
+						var key;
+						for(key in rates){
+						    if(key === '@maxNightlyRate'){
+						    preNightlyRate = rates[key];
+						    };
+						    if(key === '@total'){
+						    preTotalHotelRate = rates[key];
+							};
 						};
-					};
-					preNightlyRate = countryService.modifyIncome(preNightlyRate);
-					preTotalHotelRate = countryService.modifyIncome(preTotalHotelRate);
-					$scope.nightlyRate = intService.modifyIncome(preNightlyRate);
-					$scope.hotelTotal = intService.modifyIncome(preTotalHotelRate);
-					console.log(income);
-					console.log(preTotalHotelRate);
-					preFxIncome = income - preTotalHotelRate;
-					$scope.preFxIncome = intService.modifyIncome(preFxIncome);
-					fxIncome = data[0].currentRate * preFxIncome;
-					$scope.fxIncome = intService.modifyIncome(fxIncome);
+						preNightlyRate = countryService.modifyIncome(preNightlyRate);
+						preTotalHotelRate = countryService.modifyIncome(preTotalHotelRate);
+						$scope.nightlyRate = intService.modifyIncome(preNightlyRate);
+						$scope.hotelTotal = intService.modifyIncome(preTotalHotelRate);
+						preFxIncome = income - preTotalHotelRate - airPrice;
+						$scope.preFxIncome = intService.modifyIncome(preFxIncome);
+						fxIncome = data[0].currentRate * preFxIncome;
+						$scope.fxIncome = intService.modifyIncome(fxIncome);
+					});
 				});
 	 		});	
 	 	};

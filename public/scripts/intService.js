@@ -9,7 +9,6 @@ var app = angular.module('travelApp');
 			    s = temaparray[0];
 			    var l = s.length;
 			    var res = ""//+s[0];
-			    console.log(res);
 			    for (var i=0;i<l-1;i++)
 			    {
 			        if ((l-i)%3==0 && l>3)

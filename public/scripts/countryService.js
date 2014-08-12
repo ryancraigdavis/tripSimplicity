@@ -13,8 +13,6 @@ var app = angular.module('travelApp');
 		    countryName = array.join('');
   			return countryName;
 		};
-
-
 		this.modifyIncome = function(income){
 			if(typeof income === 'string'){
 				var incomePre = 0;
@@ -25,7 +23,6 @@ var app = angular.module('travelApp');
 			        }
 			    }
 			    incomePre = array.join('');
-			    console.log(incomePre);
 			    incomePre = parseInt(incomePre);
 	  			return incomePre;
 			}
@@ -44,5 +41,39 @@ var app = angular.module('travelApp');
 			    deferred.reject(err);
 			});
 			return deferred.promise;
+		};
+		
+		this.modifyCity = function(city){
+			var cityName = [];
+			var array = city.split('');
+			   for(var i=0;i<array.length;i++){
+			       if(array[i] == ','){
+			       	break;
+			       }
+			       cityName.push(array[i]);
+			   }
+			   city = cityName.join('');
+			  return city;
+		};
+
+		this.getAirportCode = function(code){
+			var airportCode = [];
+			var array = code.split('');
+			   for(var i=0;i<array.length;i++){
+			       if(array[i] == '|'){
+			       	airportCode = array.splice(i+1,array.length);
+			                    break;
+			       }
+			   }
+			   code = airportCode.join('');
+			  return code;
+		};
+
+		this.modifyAirPrice = function(air){
+			var array = air.split('');
+		   	air = array.splice(3,array.length);
+		   	air = air.join('');
+		   	air = parseInt(air);
+  			return air;
 		};
 	});
