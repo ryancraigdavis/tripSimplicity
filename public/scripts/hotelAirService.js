@@ -48,7 +48,7 @@ var app = angular.module('travelApp');
 			var deferred = $q.defer();
 			$http({
 				method: 'POST', 
-				url: 'https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyDUpU-AAvTxGpj9TGv1Q-vEBbB-U-TPnI8',
+				url: 'https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyDkxU7MMdOC-6Eb3eErVzSlUUbYkfCi9gQ',
 				data: {
 				  "request": {
 				    "slice": [
