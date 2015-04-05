@@ -49,9 +49,6 @@ var app = angular.module('travelApp');
 			var oCode = oAirCode
 			var dCode = dAirCode
 
-			console.log(oCode)
-			console.log(dCode)
-
 			var deferred = $q.defer();
 			$http({
 				method: 'POST', 
