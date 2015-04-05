@@ -45,9 +45,8 @@ var app = angular.module('travelApp');
 			return deferred.promise;
 		};
 		this.getAir = function(adults,children,aDate,oAirCode,dAirCode){
-			console.log(oAirCode)
-			console.log(dAirCode)
-
+			typeof oAirCode
+			typeof dAirCode
 			var oCode = "\""+oAirCode+"\""
 			var dCode = "\""+dAirCode+"\""
 
