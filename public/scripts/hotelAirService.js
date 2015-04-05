@@ -44,12 +44,10 @@ var app = angular.module('travelApp');
 			});
 			return deferred.promise;
 		};
-		this.getAir = function(adults,children,aDate,oAirCode,dAirCode){
-			console.log(typeof oAirCode)
-			console.log(typeof dAirCode)
-			
-			var oCode = "\""+oAirCode+"\""
-			var dCode = "\""+dAirCode+"\""
+		this.getAir = function(adults,children,aDate,oAirCode,dAirCode){)
+
+			var oCode = oAirCode
+			var dCode = dAirCode
 
 			console.log(oCode)
 			console.log(dCode)
