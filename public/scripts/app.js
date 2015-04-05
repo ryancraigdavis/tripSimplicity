@@ -1,1 +1,2 @@
-var app = angular.module('travelApp', []);
+var app = angular.module('travelApp', ['angucomplete-alt']);
+

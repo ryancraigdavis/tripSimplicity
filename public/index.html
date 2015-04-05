@@ -7,6 +7,7 @@
 		<meta name="keywords" content="" />
 		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
+		<link rel="stylesheet" href="bower_components/angucomplete-alt/angucomplete-alt.css"/>
 		<link href="http://vjs.zencdn.net/4.6/video-js.css" rel="stylesheet">
 		<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
 		<script src="js/jquery.min.js"></script>
@@ -82,7 +83,7 @@
 								    Choose Country <span class="caret"></span>
 								  </button>
 								  <ul class="dropdown-menu" role="menu">
-								  	<li><a ng-click="getCountry('Canada')">Canada</a></li>
+								  	<!-- <li><a ng-click="getCountry('Canada')">Canada</a></li> -->
 <!-- 								  	<li><a ng-click="getCountry('China')">China</a></li> -->
 								  	<li><a ng-click="getCountry('France')">France</a></li>
 								    <li><a ng-click="getCountry('Mexico')">Mexico</a></li>
@@ -137,6 +138,7 @@
 						</div>
 						<div class="hotel-rating-selection">
 							<h4>Hotel Rating Selection</h4>
+							<div>{{item}}</div>
 							<div class="form-same">
 								<label for="minStars"></label>
 								<div class="btn-group">
@@ -159,7 +161,25 @@
 							<div class="form-row">
 								<div id="bloodhound">
 									<label for="city">Departure City</label>
-									<input id="city" ng-model="oCity" class="typeahead" placeholder="Departure City"/>
+									<div class="large-padded-row">
+						        		<div class="padded-row">
+						          			<div angucomplete-alt="" id="ex1" placeholder="Search Departure Cities" maxlength="50" pause="100" selected-object="oCity" local-data="airports" search-fields="city,code" title-field="city,code" minlength="3" input-class="form-control form-control-small" match-class="highlight" class="ng-isolate-scope">
+						          				<div class="angucomplete-holder" ng-class="{'angucomplete-dropdown-visible': showDropdown}">  
+						          					<input id="ex1_value" ng-model="searchStr" type="" placeholder="Search Departure Cities" maxlength="50" ng-focus="onFocusHandler()" class="form-control form-control-small ng-dirty" ng-blur="hideResults($event)" autocapitalize="off" autocorrect="off" autocomplete="off" ng-change="inputChangeHandler(searchStr)">  
+						          					<div id="ex1_dropdown" class="angucomplete-dropdown ng-hide" ng-show="showDropdown">    
+						          						<div class="angucomplete-searching ng-binding ng-hide" ng-show="searching" ng-bind="textSearching">Searching...
+						          						</div>    
+						          						<div class="angucomplete-searching ng-binding" ng-show="!searching &amp;&amp; (!results || results.length == 0)" ng-bind="textNoResults">No results found
+						          						</div>    <!-- ngRepeat: result in results -->  
+						          					</div>
+						          				</div>
+						          			</div>
+						       			 </div>
+						        		<div class="result">
+						          			<div ng-show="oCity" class="ng-hide">
+						          			</div>
+						        		</div>
+						      		</div>
 								</div>
 							</div>
 						</div>
@@ -167,7 +187,25 @@
 							<div class="form-row">
 								<div id="bloodhound">
 									<label for="city">Destination City</label>
-									<input id="city" ng-model="dCity" class="typeahead" placeholder="Destination City"/>
+									<div class="large-padded-row">
+						        		<div class="padded-row">
+						          			<div angucomplete-alt="" id="ex1" placeholder="Search Destination Cities" maxlength="50" pause="100" selected-object="dCity" local-data="airports" search-fields="city,code" title-field="city,code" minlength="3" input-class="form-control form-control-small" match-class="highlight" class="ng-isolate-scope">
+						          				<div class="angucomplete-holder" ng-class="{'angucomplete-dropdown-visible': showDropdown}">  
+						          					<input id="ex1_value" ng-model="searchStr" type="" placeholder="Search Departure Cities" maxlength="50" ng-focus="onFocusHandler()" class="form-control form-control-small ng-dirty" ng-blur="hideResults($event)" autocapitalize="off" autocorrect="off" autocomplete="off" ng-change="inputChangeHandler(searchStr)">  
+						          					<div id="ex1_dropdown" class="angucomplete-dropdown ng-hide" ng-show="showDropdown">    
+						          						<div class="angucomplete-searching ng-binding ng-hide" ng-show="searching" ng-bind="textSearching">Searching...
+						          						</div>    
+						          						<div class="angucomplete-searching ng-binding" ng-show="!searching &amp;&amp; (!results || results.length == 0)" ng-bind="textNoResults">No results found
+						          						</div>    <!-- ngRepeat: result in results -->  
+						          					</div>
+						          				</div>
+						          			</div>
+						       			 </div>
+						        		<div class="result">
+						          			<div ng-show="dCity" class="ng-hide">
+						          			</div>
+						        		</div>
+						      		</div>
 								</div>
 							</div>
 						</div>
@@ -238,11 +276,14 @@
 	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="http://vjs.zencdn.net/4.6/video.js"></script>
 	<script src="bower_components/typeahead.js/dist/typeahead.bundle.min.js"></script>
+	<script src="bower_components/angucomplete-alt/dist/angucomplete-alt.min.js"></script>
 
 	<script src="js/autocomplete.js"></script>
 	<script src="scripts/app.js"></script>
 	<script src="scripts/mainCtrl.js"></script>
+
 	<script src="scripts/taxService.js"></script>
+	<script src="scripts/airportService.js"></script>
 	<script src="scripts/countryService.js"></script>
 	<script src="scripts/intService.js"></script>
 	<script src="scripts/hotelAirService.js"></script>

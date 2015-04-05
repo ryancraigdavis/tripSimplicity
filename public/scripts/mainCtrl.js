@@ -1,7 +1,7 @@
 'use strict';
 
-var app = angular.module('travelApp');
-	app.controller('mainCtrl', function ($scope,taxService,countryService,intService,hotelAirService) {
+var app = angular.module('travelApp',['angucomplete-alt']);
+	app.controller('mainCtrl', function ($scope,taxService,airportService,countryService,intService,hotelAirService) {
 		$scope.getCountry = function(country){
 			$scope.country = country;
 			$scope.countryImage = './images/'+country+'/flag.jpg';
@@ -24,11 +24,33 @@ var app = angular.module('travelApp');
 			$scope.starMin = minStars;
 			$scope.starMax = minStars;
 		};
+		var airportList = airportService.getCode();
+		$scope.airports = airportList;
+
+    $scope.inputChanged = function(str) {
+      $scope.console10 = str;
+    }
+
+    $scope.focusState = 'None';
+    $scope.focusIn = function() {
+      var focusInputElem = document.getElementById('ex12_value');
+      $scope.focusState = 'In';
+      focusInputElem.classList.remove('small-input');
+    }
+    $scope.focusOut = function() {
+      var focusInputElem = document.getElementById('ex12_value');
+      $scope.focusState = 'Out';
+      focusInputElem.classList.add('small-input');
+    }
+
+    $scope.disableInput = true;
+
 	 	$scope.getRate = function(country,income,adults,children,starMin,preArrive,preDepart,dCity,oCity){
 	 		if(preDepart<=preArrive){
 	 			alert('Please select a return date that follows your departure date!');
 	 			return;
 	 		};
+	 		console.log(oCity.description.code);
 	 		var modifiedName = countryService.modifyTax(country);
 	 		var fxIncome = 0;
 	 		var countryCode = '';
@@ -42,12 +64,10 @@ var app = angular.module('travelApp');
 	 		var airPrice = '';
 	 		arrive = hotelAirService.fixDate(preArrive);
 	 		depart = hotelAirService.fixDate(preDepart);
-	 		var departureCity = countryService.modifyCity(oCity);
-	 		var destinationCity = countryService.modifyCity(dCity);
-	 		$scope.departureCity = departureCity;
-	 		$scope.destinationCity = destinationCity;
-	 		var oAirCode = countryService.getAirportCode(oCity);
-	 		var dAirCode = countryService.getAirportCode(dCity);
+	 		$scope.departureCity = oCity.description.city;
+	 		$scope.destinationCity = oCity.description.city;
+	 		var oAirCode = oCity.description.code;
+	 		var dAirCode = dCity.description.code;
 	 		income = countryService.modifyIncome(income);
 	 		$scope.preBudget = intService.modifyIncome(income);
 			countryService.getTax(modifiedName).then(function(data){

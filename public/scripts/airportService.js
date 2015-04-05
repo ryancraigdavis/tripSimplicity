@@ -1,4 +1,9 @@
-[{"name":"Aalborg, Denmark","code":"AAL"},{"city":
+'use strict';
+
+var app = angular.module('travelApp');
+	app.service('airportService', function airportService() {
+		this.getCode = function(){
+			var list = [{"name":"Aalborg, Denmark","code":"AAL"},{"city":
 "Aalesund, Norway","code":"AES"},{"city":
 "Aarhus, Denmark - Bus service","code":"ZID"},{"city":
 "Aarhus, Denmark - Tirstrup","code":"AAR"},{"city":
@@ -3590,3 +3595,6 @@
 "Zouerate, Mauritania","code":"OUZ"},{"city":
 "Zugapa, Indonesia","code":"UGU"},{"city":
 "Zurich, Switzerland","code":"ZRH"}]
+			return list;
+		};
+	});
