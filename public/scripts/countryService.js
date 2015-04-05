@@ -42,6 +42,32 @@ var app = angular.module('travelApp');
 			});
 			return deferred.promise;
 		};
+		
+		this.modifyCity = function(city){
+			var cityName = [];
+			var array = city.split('');
+			   for(var i=0;i<array.length;i++){
+			       if(array[i] == ','){
+			       	break;
+			       }
+			       cityName.push(array[i]);
+			   }
+			   city = cityName.join('');
+			  return city;
+		};
+
+		this.getAirportCode = function(code){
+			var airportCode = [];
+			var array = code.split('');
+			   for(var i=0;i<array.length;i++){
+			       if(array[i] == '|'){
+			       	airportCode = array.splice(i+1,array.length);
+			                    break;
+			       }
+			   }
+			   code = airportCode.join('');
+			  return code;
+		};
 
 		this.modifyAirPrice = function(air){
 			var array = air.split('');
