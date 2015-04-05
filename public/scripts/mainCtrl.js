@@ -50,7 +50,6 @@ var app = angular.module('travelApp',['angucomplete-alt']);
 	 			alert('Please select a return date that follows your departure date!');
 	 			return;
 	 		};
-	 		console.log(oCity.description.code);
 	 		var modifiedName = countryService.modifyTax(country);
 	 		var fxIncome = 0;
 	 		var countryCode = '';

@@ -44,7 +44,10 @@ var app = angular.module('travelApp');
 			});
 			return deferred.promise;
 		};
-		this.getAir = function(adults,children,aDate,oCode,dCode){
+		this.getAir = function(adults,children,aDate,oAirCode,dAirCode){
+			var oCode = "\""+oAirCode+"\""
+			var dCode = "\""+dAirCode+"\""
+
 			var deferred = $q.defer();
 			$http({
 				method: 'POST', 
