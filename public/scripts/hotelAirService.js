@@ -38,6 +38,7 @@ var app = angular.module('travelApp');
 			$http({
 				method: 'GET', url: 'http://www.tripsimplicity.com/hotel:name?q='+url
 			}).success(function(data) {
+				console.log(data)
 			    deferred.resolve(data);
 			}).error(function(err){
 			    deferred.reject(err);
