@@ -94,7 +94,7 @@ var app = angular.module('travelApp',['angucomplete-alt']);
 						hotelInfo = dataHotel.HotelListResponse.HotelList.HotelSummary;
 						if (hotelInfo = undefined) {
 							alert("Sorry! That location is not in our system yet! Please pick another location!")
-							break;
+							return;
 						};
 						rates = hotelInfo.RoomRateDetailsList.RoomRateDetails.RateInfo.ChargeableRateInfo;
 						var key;
