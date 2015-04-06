@@ -3,7 +3,7 @@
 var app = angular.module('travelApp',['angucomplete-alt']);
 	app.controller('mainCtrl', function ($scope,taxService,airportService,countryService,intService,hotelAirService,countryDataService) {
 
-		};
+		
 		$scope.getUsa = function(country){
 			$scope.country = country;
 			$scope.usa = country;
