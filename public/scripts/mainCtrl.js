@@ -92,6 +92,10 @@ var app = angular.module('travelApp',['angucomplete-alt']);
 					$scope.flightCost = intService.modifyIncome(airPrice);
 					hotelAirService.getHotel(adults,children,starMin,arrive,depart,countryCode,destinationCity).then(function(dataHotel){
 						hotelInfo = dataHotel.HotelListResponse.HotelList.HotelSummary;
+						if (hotelInfo = undefined) {
+							alert("Sorry! That location is not in our system yet! Please pick another location!")
+							break;
+						};
 						rates = hotelInfo.RoomRateDetailsList.RoomRateDetails.RateInfo.ChargeableRateInfo;
 						var key;
 						for(key in rates){
@@ -107,12 +111,10 @@ var app = angular.module('travelApp',['angucomplete-alt']);
 						$scope.nightlyRate = intService.modifyIncome(preNightlyRate);
 						$scope.hotelTotal = intService.modifyIncome(preTotalHotelRate);
 						preFxIncome = income - preTotalHotelRate - airPrice;
-						var preFxIncomeAmount = intService.modifyIncome(preFxIncome);
-						$scope.preFxIncome = preFxIncomeAmount;
+						$scope.preFxIncome = intService.modifyIncome(preFxIncome);
 						countryService.getTax(country.description.currency_alphabetic_code).then(function(data){
-						console.log(data)
+						var preFxIncomeAmount = intService.modifyIncome(preFxIncome);
 						fxIncome = data * preFxIncomeAmount;
-						console.log(fxIncome);
 						});
 						$scope.fxIncome = intService.modifyIncome(fxIncome);
 					});
