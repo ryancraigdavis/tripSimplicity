@@ -112,7 +112,7 @@ var app = angular.module('travelApp',['angucomplete-alt']);
 						$scope.preFxIncome = intService.modifyIncome(preFxIncome);
 						fxIncome = fxRate * preFxIncome;
 						console.log(preFxIncome);
-							console.log(FxIncome);
+							console.log(fxIncome);
 							console.log(fxRate);
 						console.log(typeof preFxIncome)
 						console.log(typeof fxRate)
