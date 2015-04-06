@@ -38,7 +38,6 @@ var app = angular.module('travelApp');
 			$http({
 				method: 'GET', url: 'http://www.tripsimplicity.com/hotel:name?q='+url
 			}).success(function(data) {
-				if (data.HotelListResponse.EanWsError.category = "RESULT_NULL") {alert("Results are not availible for these dates, please try again!") break};
 			    deferred.resolve(data);
 			}).error(function(err){
 			    deferred.reject(err);
