@@ -92,7 +92,7 @@ var app = angular.module('travelApp',['angucomplete-alt']);
 					airPrice = countryService.modifyAirPrice(airPrice);
 					$scope.flightCost = intService.modifyIncome(airPrice);
 					hotelAirService.getHotel(adults,children,starMin,arrive,depart,countryCode,destinationCity).then(function(dataHotel){
-						if (dataHotel.HotelListResponse.EanWsError.category = "RESULT_NULL") {alert("Results are not availible for these dates, please try again!") break};
+						if (dataHotel.HotelListResponse.EanWsError.category = "RESULT_NULL") {alert("Results are not availible for these dates, please try again!") return};
 						hotelInfo = dataHotel.HotelListResponse.HotelList.HotelSummary;
 						rates = hotelInfo.RoomRateDetailsList.RoomRateDetails.RateInfo.ChargeableRateInfo;
 						var key;
