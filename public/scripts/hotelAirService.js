@@ -41,7 +41,6 @@ var app = angular.module('travelApp');
 			    deferred.resolve(data);
 			}).error(function(err){
 			    deferred.reject(err);
-			    alert("ERRROR11")
 			});
 			return deferred.promise;
 		};
