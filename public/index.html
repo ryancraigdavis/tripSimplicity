@@ -78,19 +78,41 @@
 							<div class="form-same">
 								<h3>Country Selection</h3>
 								<label for="country">Country</label>
-								<div class="btn-group">
+
+								<div class="large-padded-row">
+						        		<div class="padded-row">
+						          			<div angucomplete-alt="" id="ex1" placeholder="Country Selection" maxlength="50" pause="100" selected-object="country" local-data="countries" search-fields="name" title-field="name" minlength="3" input-class="form-control form-control-small" match-class="highlight" class="ng-isolate-scope">
+						          				<div class="angucomplete-holder" ng-class="{'angucomplete-dropdown-visible': showDropdown}">  
+						          					<input id="ex1_value" ng-model="searchStr" type="" placeholder="Country Selection" maxlength="50" ng-focus="onFocusHandler()" class="form-control form-control-small ng-dirty" ng-blur="hideResults($event)" autocapitalize="off" autocorrect="off" autocomplete="off" ng-change="inputChangeHandler(searchStr)">  
+						          					<div id="ex1_dropdown" class="angucomplete-dropdown ng-hide" ng-show="showDropdown">    
+						          						<div class="angucomplete-searching ng-binding ng-hide" ng-show="searching" ng-bind="textSearching">Searching...
+						          						</div>    
+						          						<div class="angucomplete-searching ng-binding" ng-show="!searching &amp;&amp; (!results || results.length == 0)" ng-bind="textNoResults">No results found
+						          						</div>    <!-- ngRepeat: result in results -->  
+						          					</div>
+						          				</div>
+						          			</div>
+						       			 </div>
+						        		<div class="result">
+						          			<div ng-show="country" class="ng-hide">
+						          			</div>
+						        		</div>
+						      		</div>
+
+
+								<!-- <div class="btn-group">
 								  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
 								    Choose Country <span class="caret"></span>
 								  </button>
-								  <ul class="dropdown-menu" role="menu">
+								  <ul class="dropdown-menu" role="menu"> -->
 								  	<!-- <li><a ng-click="getCountry('Canada')">Canada</a></li> -->
 <!-- 								  	<li><a ng-click="getCountry('China')">China</a></li> -->
-								  	<li><a ng-click="getCountry('France')">France</a></li>
+								  	<!-- <li><a ng-click="getCountry('France')">France</a></li>
 								    <li><a ng-click="getCountry('Mexico')">Mexico</a></li>
-								    <li><a ng-click="getCountry('United Kingdom')">United Kingdom</a></li>
+								    <li><a ng-click="getCountry('United Kingdom')">United Kingdom</a></li> -->
 <!-- 								    <li><a ng-click="getUsa('United States')">United States</a></li> -->
-								  </ul>
-								</div>
+								 <!--  </ul>
+								</div> -->
 							</div>
 								<div class="form-same" ng-hide="!usa">
 								<label for="state">State</label>
@@ -229,8 +251,7 @@
 				<div class="signup-form">
 					<form>
 						<div class="info-wrap" ng-hide="!country">
-							<div class="info" id="country-image"><img src='{{countryImage}}'/></div>
-							<div class="info" id="country-name">{{country}}</div>
+							<div class="info" id="country-name">{{countryName}}</div>
 						</div>
 						<div ng-hide="!fxIncome">
 							<div class="form-row">
@@ -245,12 +266,12 @@
 								Average nightly hotel rate: {{nightlyRate}}.
 								Total cost of a hotel in {{destinationCity}}: {{hotelTotal}}.
 							</div>
-							<div class="form-row">
+						<!-- 	<div class="form-row">
 								<h3 class="red-titles">Visa Requirements</h3>
-								<!-- Your visa will cost ((visaCost)). You can apply for the visa here: ((visaUrl)).
-								The visa will take an average of ((visaDays)) days. -->
+								Your visa will cost ((visaCost)). You can apply for the visa here: ((visaUrl)).
+								The visa will take an average of ((visaDays)) days.
 								{{countryName}} does not require a visa for tourists.
-							</div>
+							</div> -->
 							<div class="form-row">
 								<h3 class="red-titles">Exchange Rate</h3>
 								Your pre-exchange rate amount of money is {{preFxIncome}}.
@@ -285,6 +306,7 @@
 	<script src="scripts/taxService.js"></script>
 	<script src="scripts/airportService.js"></script>
 	<script src="scripts/countryService.js"></script>
+	<script src="scripts/countryDataService.js"></script>
 	<script src="scripts/intService.js"></script>
 	<script src="scripts/hotelAirService.js"></script>
 	</body>

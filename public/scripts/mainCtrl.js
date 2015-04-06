@@ -1,7 +1,7 @@
 'use strict';
 
 var app = angular.module('travelApp',['angucomplete-alt']);
-	app.controller('mainCtrl', function ($scope,taxService,airportService,countryService,intService,hotelAirService) {
+	app.controller('mainCtrl', function ($scope,taxService,airportService,countryService,intService,hotelAirService,countryDataService) {
 		$scope.getCountry = function(country){
 			$scope.country = country;
 			$scope.countryImage = './images/'+country+'/flag.jpg';
@@ -24,6 +24,10 @@ var app = angular.module('travelApp',['angucomplete-alt']);
 			$scope.starMin = minStars;
 			$scope.starMax = minStars;
 		};
+
+		var countryData = countryDataService.getCountryData();
+		$scope.countries = countryData;
+
 		var airportList = airportService.getCode();
 		$scope.airports = airportList;
 
@@ -43,6 +47,9 @@ var app = angular.module('travelApp',['angucomplete-alt']);
       focusInputElem.classList.add('small-input');
     }
 
+
+
+
     $scope.disableInput = true;
 
 	 	$scope.getRate = function(country,income,adults,children,starMin,preArrive,preDepart,dCity,oCity){
@@ -50,7 +57,8 @@ var app = angular.module('travelApp',['angucomplete-alt']);
 	 			alert('Please select a return date that follows your departure date!');
 	 			return;
 	 		};
-	 		var modifiedName = countryService.modifyTax(country);
+
+	 		// var modifiedName = countryService.modifyTax(country);
 	 		var fxIncome = 0;
 	 		var countryCode = '';
 	 		var hotelInfo = {};
@@ -71,13 +79,14 @@ var app = angular.module('travelApp',['angucomplete-alt']);
 	 		var dAirCode = dCity.description.code;
 	 		income = countryService.modifyIncome(income);
 	 		$scope.preBudget = intService.modifyIncome(income);
-			countryService.getTax(modifiedName).then(function(data){
-				$scope.countryName = data[0].name;
-				data.shift();
-				$scope.currency = data[0].currency;
-				countryCode = data[1].hotelCode;
+			// countryService.getTax(modifiedName).then(function(data){
+				// $scope.countryName = data[0].name;
+
+				$scope.countryName = country.description.name;
+				// data.shift();
+				$scope.currency = country.description.currency_name;
+				countryCode = country.description.ISO3166_1_Alpha_2;
 				airPrice = hotelAirService.getAir(adults,children,preArrive,oAirCode,dAirCode).then(function(dataAir){
-					console.log(dataAir);
 					airPrice = dataAir.trips.tripOption[0].saleTotal;
 					airPrice = countryService.modifyAirPrice(airPrice);
 					$scope.flightCost = intService.modifyIncome(airPrice);
@@ -99,10 +108,13 @@ var app = angular.module('travelApp',['angucomplete-alt']);
 						$scope.hotelTotal = intService.modifyIncome(preTotalHotelRate);
 						preFxIncome = income - preTotalHotelRate - airPrice;
 						$scope.preFxIncome = intService.modifyIncome(preFxIncome);
+						countryService.getTax(country.description.currency_alphabetic_code).then(function(data){
+						console.log(data)
 						fxIncome = data[0].currentRate * preFxIncome;
+						});
 						$scope.fxIncome = intService.modifyIncome(fxIncome);
 					});
 				});
-	 		});	
+	 		// });	
 	 	};
 	});

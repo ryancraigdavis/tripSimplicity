@@ -19,22 +19,33 @@ oxr.set({ app_id: '100c056c90844cbaaf1cb44aa19dc406' });
 
 app.use(express.static(__dirname + '/public'));
 
+// app.get('/tax:name', function(req, res){
+//   res.setHeader('Content-Type', 'application/json');
+//     for(var i=0;i<countryData.getCountries().length;i++){
+//       if(req.query.q === countryData.getCountries()[i][0].name){
+//         var fxCode = countryData.getCountries()[i][1].rate;
+//         var preData = countryData.getCountries()[i];
+//         oxr.latest(function() {
+//           fx.rates = oxr.rates;
+//           fx.base = oxr.base;
+//           var fxRate = fx(1).from('USD').to(fxCode);
+//           preData[1].currentRate = fxRate;
+//           res.send(JSON.stringify(preData));
+//         });
+//       }
+//     }
+// });  
+
 app.get('/tax:name', function(req, res){
   res.setHeader('Content-Type', 'application/json');
-    for(var i=0;i<countryData.getCountries().length;i++){
-      if(req.query.q === countryData.getCountries()[i][0].name){
-        var fxCode = countryData.getCountries()[i][1].rate;
-        var preData = countryData.getCountries()[i];
+        var fxCode = req.query.q;
         oxr.latest(function() {
           fx.rates = oxr.rates;
           fx.base = oxr.base;
           var fxRate = fx(1).from('USD').to(fxCode);
-          preData[1].currentRate = fxRate;
-          res.send(JSON.stringify(preData));
+          res.send(JSON.stringify(fxRate));
         });
-      }
-    }
-});  
+  });  
 
 app.get('/hotel:name', function(req, res){
   res.setHeader('Content-Type', 'application/json');
@@ -48,4 +59,4 @@ app.get('/hotel:name', function(req, res){
   });
 }); 
 
-app.listen(80);
+app.listen(9000);
