@@ -110,7 +110,7 @@ var app = angular.module('travelApp',['angucomplete-alt']);
 						$scope.preFxIncome = intService.modifyIncome(preFxIncome);
 						countryService.getTax(country.description.currency_alphabetic_code).then(function(data){
 						console.log(data)
-						fxIncome = data[0].currentRate * preFxIncome;
+						fxIncome = data * preFxIncome;
 						});
 						$scope.fxIncome = intService.modifyIncome(fxIncome);
 					});
