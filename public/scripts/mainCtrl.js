@@ -83,6 +83,7 @@ var app = angular.module('travelApp',['angucomplete-alt']);
 				// $scope.countryName = data[0].name;
 				countryService.getTax(country.description.currency_alphabetic_code).then(function(dataFx){
 				var fxRate = dataFx;
+				console.log(fxRate);
 				$scope.countryName = country.description.name;
 				// data.shift();
 				$scope.currency = country.description.currency_name;
@@ -111,7 +112,9 @@ var app = angular.module('travelApp',['angucomplete-alt']);
 						preFxIncome = income - preTotalHotelRate - airPrice;
 						$scope.preFxIncome = intService.modifyIncome(preFxIncome);
 						var preFxIncomeAmount = intService.modifyIncome(preFxIncome);
+							console.log(preFxIncomeAmount);
 						fxIncome = fxRate * preFxIncomeAmount;
+							console.log(fxIncome);
 						});
 						$scope.fxIncome = intService.modifyIncome(fxIncome);
 					});
