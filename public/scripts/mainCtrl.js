@@ -2,9 +2,7 @@
 
 var app = angular.module('travelApp',['angucomplete-alt']);
 	app.controller('mainCtrl', function ($scope,taxService,airportService,countryService,intService,hotelAirService,countryDataService) {
-		$scope.getCountry = function(country){
-			$scope.country = country;
-			$scope.countryImage = './images/'+country+'/flag.jpg';
+
 		};
 		$scope.getUsa = function(country){
 			$scope.country = country;
@@ -57,8 +55,6 @@ var app = angular.module('travelApp',['angucomplete-alt']);
 	 			alert('Please select a return date that follows your departure date!');
 	 			return;
 	 		};
-
-	 		// var modifiedName = countryService.modifyTax(country);
 	 		var fxIncome = 0;
 	 		var countryCode = '';
 	 		var hotelInfo = {};
@@ -79,13 +75,10 @@ var app = angular.module('travelApp',['angucomplete-alt']);
 	 		var dAirCode = dCity.description.code;
 	 		income = countryService.modifyIncome(income);
 	 		$scope.preBudget = intService.modifyIncome(income);
-			// countryService.getTax(modifiedName).then(function(data){
-				// $scope.countryName = data[0].name;
 				countryService.getTax(country.description.currency_alphabetic_code).then(function(dataFx){
 				var fxRate = dataFx;
 				console.log(fxRate);
 				$scope.countryName = country.description.name;
-				// data.shift();
 				$scope.currency = country.description.currency_name;
 				countryCode = country.description.ISO3166_1_Alpha_2;
 				airPrice = hotelAirService.getAir(adults,children,preArrive,oAirCode,dAirCode).then(function(dataAir){
@@ -112,13 +105,10 @@ var app = angular.module('travelApp',['angucomplete-alt']);
 						preFxIncome = income - preTotalHotelRate - airPrice;
 						$scope.preFxIncome = intService.modifyIncome(preFxIncome);
 						var preFxIncomeAmount = intService.modifyIncome(preFxIncome);
-							console.log(preFxIncomeAmount);
 						fxIncome = fxRate * preFxIncomeAmount;
-							console.log(fxIncome);
 						});
-						$scope.fxIncome = intService.modifyIncome(fxIncome);
+						$scope.fxIncome = fxIncome;
 					});
 				});
-	 		// });	
 	 	};
 	});
