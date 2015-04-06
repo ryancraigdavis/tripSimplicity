@@ -110,12 +110,8 @@ var app = angular.module('travelApp',['angucomplete-alt']);
 						$scope.hotelTotal = intService.modifyIncome(preTotalHotelRate);
 						preFxIncome = income - preTotalHotelRate - airPrice;
 						$scope.preFxIncome = intService.modifyIncome(preFxIncome);
-						fxIncome = fxRate * preFxIncome;
-						console.log(preFxIncome);
-							console.log(fxIncome);
-							console.log(fxRate);
-						console.log(typeof preFxIncome)
-						console.log(typeof fxRate)
+						var intFxRate = parseInt(fxRate)
+						fxIncome = intFxRate * preFxIncome;
 						});
 						$scope.fxIncome = intService.modifyIncome(fxIncome);
 					});
