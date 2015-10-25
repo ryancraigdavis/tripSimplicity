@@ -50,7 +50,7 @@
 				<div class="content container small">
 					<div class="video-text">
 						<h3>Welcome to tripSimplicity</h3>
-						<h3>tripSimplicity allows you to find the total cost of a trip to anywhere in the world!</h3>
+						<h3>tripSimplicity allows you to find the total cost of a trip to anywhere in the United States!</h3>
 						<h3>Simply enter your budget and preferences for food, flight, and hotel and click submit!</h3>
 					</div>
 				</div>
@@ -74,7 +74,7 @@
 							<label for="trip-budget">Expected Trip Budget</label>
 							<input id="trip-budget" name="name" type="text" placeholder="$$$" ng-model="income"/>
 						</div>
-						<div class="country-selection">
+						<!-- <div class="country-selection">
 							<div class="form-same">
 								<h3>Country Selection</h3>
 								<label for="country">Country</label>
@@ -88,7 +88,7 @@
 						          						<div class="angucomplete-searching ng-binding ng-hide" ng-show="searching" ng-bind="textSearching">Searching...
 						          						</div>    
 						          						<div class="angucomplete-searching ng-binding" ng-show="!searching &amp;&amp; (!results || results.length == 0)" ng-bind="textNoResults">No results found
-						          						</div>    <!-- ngRepeat: result in results -->  
+						          						</div>   
 						          					</div>
 						          				</div>
 						          			</div>
@@ -100,19 +100,19 @@
 						      		</div>
 
 
-								<!-- <div class="btn-group">
+								<div class="btn-group">
 								  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
 								    Choose Country <span class="caret"></span>
 								  </button>
-								  <ul class="dropdown-menu" role="menu"> -->
-								  	<!-- <li><a ng-click="getCountry('Canada')">Canada</a></li> -->
-<!-- 								  	<li><a ng-click="getCountry('China')">China</a></li> -->
-								  	<!-- <li><a ng-click="getCountry('France')">France</a></li>
+								  <ul class="dropdown-menu" role="menu">
+								  	<li><a ng-click="getCountry('Canada')">Canada</a></li>
+								  	<li><a ng-click="getCountry('China')">China</a></li>
+								  	<li><a ng-click="getCountry('France')">France</a></li>
 								    <li><a ng-click="getCountry('Mexico')">Mexico</a></li>
-								    <li><a ng-click="getCountry('United Kingdom')">United Kingdom</a></li> -->
-<!-- 								    <li><a ng-click="getUsa('United States')">United States</a></li> -->
-								 <!--  </ul>
-								</div> -->
+								    <li><a ng-click="getCountry('United Kingdom')">United Kingdom</a></li>
+								    <li><a ng-click="getUsa('United States')">United States</a></li>
+								  </ul>
+								</div>
 							</div>
 								<div class="form-same" ng-hide="!usa">
 								<label for="state">State</label>
@@ -127,7 +127,7 @@
 								  </ul>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<div class="adultChild-selection">
 							<div class="form-same">
 								<h3>Hotel Information</h3>
@@ -241,7 +241,7 @@
 						</div>
 					</form>
 					<div class="form-feedback"></div>
-					<button class="btn-signup" ng-click="getRate(country,income,adults,children,starMin,depart,return,dCity,oCity)"><a href="#one">Budget My Trip</a></button>
+					<button class="btn-signup" ng-click="getRate(income,adults,children,starMin,depart,return,dCity,oCity)"><a href="#one">Budget My Trip</a></button>
 				</div>
 			</div>
 	</div>
@@ -305,6 +305,7 @@
 
 	<script src="scripts/taxService.js"></script>
 	<script src="scripts/airportService.js"></script>
+	<script src="scripts/usaAirportService.js"></script>
 	<script src="scripts/countryService.js"></script>
 	<script src="scripts/countryDataService.js"></script>
 	<script src="scripts/intService.js"></script>

@@ -1,19 +1,23 @@
 'use strict';
 
 var app = angular.module('travelApp',['angucomplete-alt']);
-	app.controller('mainCtrl', function ($scope,taxService,airportService,countryService,intService,hotelAirService,countryDataService) {
-		$scope.getCountry = function(country){
-			$scope.country = country;
-			$scope.countryImage = './images/'+country+'/flag.jpg';
-		};
-		$scope.getUsa = function(country){
-			$scope.country = country;
-			$scope.usa = country;
-			$scope.countryImage = './images/'+country+'/flag.jpg';
-		};
-		$scope.getState = function(state){
-			$scope.state = state;
-		};
+	app.controller('mainCtrl', function ($scope,taxService,usaAirportService,countryService,intService,hotelAirService,countryDataService) {
+		// Beginning Variables
+		$scope.children = 0;
+
+		// $scope.getCountry = function(country){
+		// 	$scope.country = country;
+		// 	$scope.countryImage = './images/'+country+'/flag.jpg';
+		// };
+		// $scope.getUsa = function(country){
+		// 	$scope.country = country;
+		// 	$scope.usa = country;
+		// 	$scope.countryImage = './images/'+country+'/flag.jpg';
+		// };
+		// $scope.getState = function(state){
+		// 	$scope.state = state;
+		// };
+
 		$scope.getAdults = function(adults){
 			$scope.adults = adults;
 		};
@@ -25,10 +29,7 @@ var app = angular.module('travelApp',['angucomplete-alt']);
 			$scope.starMax = minStars;
 		};
 
-		var countryData = countryDataService.getCountryData();
-		$scope.countries = countryData;
-
-		var airportList = airportService.getCode();
+		var airportList = usaAirportService.getCode();
 		$scope.airports = airportList;
 
     $scope.inputChanged = function(str) {
@@ -47,17 +48,32 @@ var app = angular.module('travelApp',['angucomplete-alt']);
       focusInputElem.classList.add('small-input');
     }
 
-
-
-
     $scope.disableInput = true;
 
-	 	$scope.getRate = function(country,income,adults,children,starMin,preArrive,preDepart,dCity,oCity){
+	 	$scope.getRate = function(income,adults,children,starMin,preArrive,preDepart,dCity,oCity){
+	 		
+	 		if (income==null) {
+	 			alert('Please enter a trip budget amount');
+	 		};
+
+	 		if (adults==null) {
+	 			alert('Please specify the number of adults who will be traveling');
+	 		};
+
+	 		if(oCity==null){
+	 			alert('Please select a departure city! (Unless you plan on walking)');
+	 			return;
+	 		};
+	 		if(dCity==null){
+	 			alert('Please select a destination city!');
+	 			return;
+	 		};
 	 		if(preDepart<=preArrive){
 	 			alert('Please select a return date that follows your departure date!');
 	 			return;
 	 		};
-
+	 		var modifiedName = oCity.description.name;
+	 		console.log(modifiedName)
 	 		// var modifiedName = countryService.modifyTax(country);
 	 		var fxIncome = 0;
 	 		var countryCode = '';
@@ -81,18 +97,19 @@ var app = angular.module('travelApp',['angucomplete-alt']);
 	 		$scope.preBudget = intService.modifyIncome(income);
 			// countryService.getTax(modifiedName).then(function(data){
 				// $scope.countryName = data[0].name;
-				countryService.getTax(country.description.currency_alphabetic_code).then(function(dataFx){
-				var fxRate = dataFx;
-				$scope.countryName = country.description.name;
+				// $scope.countryName = modifiedName;
+				// countryService.getTax(country.description.currency_alphabetic_code).then(function(dataFx){
+			var fxRate = dCity.description.currency_alphabetic_code;
+			$scope.countryName = dCity.description.name;
 				// data.shift();
-				$scope.currency = country.description.currency_name;
-				countryCode = country.description.ISO3166_1_Alpha_2;
+			$scope.currency = dCity.description.currency_name;
+			countryCode = dCity.description.ISO3166_1_Alpha_2;
 				airPrice = hotelAirService.getAir(adults,children,preArrive,oAirCode,dAirCode).then(function(dataAir){
 					airPrice = dataAir.trips.tripOption[0].saleTotal;
 					airPrice = countryService.modifyAirPrice(airPrice);
 					$scope.flightCost = intService.modifyIncome(airPrice);
 					hotelAirService.getHotel(adults,children,starMin,arrive,depart,countryCode,destinationCity).then(function(dataHotel){
-						// if (dataHotel.HotelListResponse.EanWsError.category = "RESULT_NULL") {alert("Results are not availible for these dates, please try again!")};
+						if (dataHotel.HotelListResponse.EanWsError.category = "RESULT_NULL") {alert("Results are not availible for these dates, please try again!")};
 						hotelInfo = dataHotel.HotelListResponse.HotelList.HotelSummary;
 						rates = hotelInfo.RoomRateDetailsList.RoomRateDetails.RateInfo.ChargeableRateInfo;
 						var key;
@@ -115,7 +132,7 @@ var app = angular.module('travelApp',['angucomplete-alt']);
 						});
 						$scope.fxIncome = intService.modifyIncome(fxIncome);
 					});
-				});
+				// });
 	 		// });	
 	 	};
 	});
